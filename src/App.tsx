@@ -2,35 +2,52 @@ import styled from 'styled-components';
 import React, {useState} from 'react';
 import ColorTheif from './component/colorTheif.tsx';
 
-function App() {
-  
+function App() {  
   const [colorData, setColorData] = useState<string[]>([]);
+  const [imageUrl, setImageUrl] = useState<string>('');
+
   const handleColorsExtracted = (colors: string[]) => {
     setColorData(colors);
   };
   console.log(colorData)
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setImageUrl(event.target.value);
+  };
+
   return (
     <MainSection>
-      <InputSection>
-        <Title>이미지 색상 넣기</Title>
-        <TextInput type="text"></TextInput>
-        <ImageBtn>버튼</ImageBtn>
-      </InputSection>
+      <TextSection>
+        <Title>이미지 주소 넣기</Title>
+        <InputSection>
+          <TextInput type="text" value={imageUrl} onChange={handleInputChange} ></TextInput>
+          <ImageBtn>버튼</ImageBtn>
+        </InputSection>
+        {imageUrl && <Image src={imageUrl} alt="Selected" />}
+      </TextSection>
+      
       <ImageGroup>
       {colorData?.map((color, idx) => (
         <ColorWrapper key={idx}>
-        <ColorCode>`${color}`</ColorCode>
+        <ColorCode>{color}</ColorCode>
         <PickedColor style={{ backgroundColor: color }} />
         </ColorWrapper>
       ))}
       </ImageGroup>
-      <ColorTheif onColorsExtracted={handleColorsExtracted} />
+      {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
     </MainSection>
   );
 }
 
 export default App;
+
+const Image = styled.img`
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-top: 20px;
+`
 
 const ColorWrapper = styled.div`
   display: flex;
@@ -70,17 +87,27 @@ const ImageBtn = styled.button`
   cursor: pointer;
 `
 
-const InputSection = styled.section`
+const InputSection = styled.div`
+  display: flex;
+  width: 100%;
+`
+
+const TextSection = styled.section`
   width: 80%;
   background-color: #212121;
   border-radius: 20px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 const Title = styled.h1`
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 700;
   color: white;
+  margin-bottom: 10px;
 `
 
 const MainSection = styled.section`
@@ -90,10 +117,12 @@ const MainSection = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `
 
 const TextInput = styled.input`
-  width: 50%;
+  width: 30%;
   height: 1.5rem;
   border-radius: 10px;
+  margin-right: 10px;
 `
