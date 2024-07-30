@@ -1,4 +1,4 @@
-import { usePalette } from 'color-thief-react'
+import { usePalette } from 'color-thief-react';
 import React, {useEffect} from 'react';
 
 interface ColorTheifProps {
@@ -10,7 +10,7 @@ interface ColorTheifProps {
 const ColorTheif: React.FC<ColorTheifProps> = ({ imageUrl, onColorsExtracted }) => {
     const { data: colorData } = usePalette(
     imageUrl,
-      9,
+      7,
       'hex',
       {
         crossOrigin: 'anonymous',

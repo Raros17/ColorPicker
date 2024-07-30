@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React, {useState} from 'react';
 import ColorTheif from './component/colorTheif.tsx';
+import ColorModal from './component/colorModal.tsx';
 
 function App() {  
   const [colorData, setColorData] = useState<string[]>([]);
@@ -9,7 +10,6 @@ function App() {
   const handleColorsExtracted = (colors: string[]) => {
     setColorData(colors);
   };
-  console.log(colorData)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setImageUrl(event.target.value);
@@ -33,7 +33,7 @@ function App() {
         <PickedColor style={{ backgroundColor: color }} />
         </ColorWrapper>
       ))}
-      <ColorDownBtn>냑</ColorDownBtn>
+      <ColorDownBtn>얍!</ColorDownBtn>
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
     </MainSection>
@@ -50,9 +50,14 @@ const ColorDownBtn = styled.button`
   transition: all 0.5s ease;
   cursor: pointer;
   display: flex;
-  font-size: 25px;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 800;
+  background-color: #262626;
+  color: #fff;
   &:hover {
-    background-color: #ccc;
+    background-color: #101010;
   }
 `
 
