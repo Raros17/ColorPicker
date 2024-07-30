@@ -8,6 +8,7 @@ function App() {
   const handleColorsExtracted = (colors: string[]) => {
     setColorData(colors);
   };
+  console.log(colorData)
 
   return (
     <MainSection>
@@ -18,7 +19,10 @@ function App() {
       </InputSection>
       <ImageGroup>
       {colorData?.map((color, idx) => (
-        <PickedColor key={idx} style={{ backgroundColor: color }} />
+        <ColorWrapper key={idx}>
+        <ColorCode>`${color}`</ColorCode>
+        <PickedColor style={{ backgroundColor: color }} />
+        </ColorWrapper>
       ))}
       </ImageGroup>
       <ColorTheif onColorsExtracted={handleColorsExtracted} />
@@ -28,13 +32,33 @@ function App() {
 
 export default App;
 
+const ColorWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  position:relative;
+`
+
+const ColorCode = styled.h5`
+  color: #fff;
+  font-weight: 800;
+  background-color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: absolute;
+
+`
+
 const ImageGroup = styled.div`
   width: 100%;
   display: flex;
 `
 const PickedColor = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  margin: 5px;
 `
 
 const ImageBtn = styled.button`
