@@ -1,9 +1,14 @@
 import styled from 'styled-components';
-import React from 'react';
-import ColorTheif from './component/colorTheif';
+import React, {useState} from 'react';
+import ColorTheif from './component/colorTheif.tsx';
 
 function App() {
-  const colorData = [];
+  
+  const [colorData, setColorData] = useState<string[]>([]);
+  const handleColorsExtracted = (colors: string[]) => {
+    setColorData(colors);
+  };
+
   return (
     <MainSection>
       <InputSection>
@@ -12,10 +17,11 @@ function App() {
         <ImageBtn>버튼</ImageBtn>
       </InputSection>
       <ImageGroup>
-      {colorData?.map((color) => (
-        <PickedColor style={{ backgroundColor: color }} />
+      {colorData?.map((color, idx) => (
+        <PickedColor key={idx} style={{ backgroundColor: color }} />
       ))}
       </ImageGroup>
+      <ColorTheif onColorsExtracted={handleColorsExtracted} />
     </MainSection>
   );
 }
@@ -24,6 +30,7 @@ export default App;
 
 const ImageGroup = styled.div`
   width: 100%;
+  display: flex;
 `
 const PickedColor = styled.div`
   width: 20px;
