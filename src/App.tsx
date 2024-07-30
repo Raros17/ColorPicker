@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
+import ColorTheif from './component/colorTheif';
 
 function App() {
+  const colorData = [];
   return (
     <MainSection>
       <InputSection>
@@ -9,11 +11,24 @@ function App() {
         <TextInput type="text"></TextInput>
         <ImageBtn>버튼</ImageBtn>
       </InputSection>
+      <ImageGroup>
+      {colorData?.map((color) => (
+        <PickedColor style={{ backgroundColor: color }} />
+      ))}
+      </ImageGroup>
     </MainSection>
   );
 }
 
 export default App;
+
+const ImageGroup = styled.div`
+  width: 100%;
+`
+const PickedColor = styled.div`
+  width: 20px;
+  height: 20px;
+`
 
 const ImageBtn = styled.button`
   width: 100px;
