@@ -10,7 +10,7 @@ interface ColorTheifProps {
 const ColorTheif: React.FC<ColorTheifProps> = ({ imageUrl, onColorsExtracted }) => {
     const { data: colorData } = usePalette(
     imageUrl,
-      7,
+      9,
       'hex',
       {
         crossOrigin: 'anonymous',

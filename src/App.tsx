@@ -18,10 +18,10 @@ function App() {
   return (
     <MainSection>
       <TextSection>
-        <Title>이미지 주소 넣기</Title>
+        <Title>외부 이미지 주소 넣기</Title>
         <InputSection>
           <TextInput type="text" value={imageUrl} onChange={handleInputChange} ></TextInput>
-          <ImageBtn>버튼</ImageBtn>
+          <ImageBtn>뽑기!</ImageBtn>
         </InputSection>
         {imageUrl && <Image src={imageUrl} alt="Selected" />}
       </TextSection>
@@ -33,6 +33,7 @@ function App() {
         <PickedColor style={{ backgroundColor: color }} />
         </ColorWrapper>
       ))}
+      <ColorDownBtn>냑</ColorDownBtn>
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
     </MainSection>
@@ -40,6 +41,20 @@ function App() {
 }
 
 export default App;
+
+const ColorDownBtn = styled.button`
+  width: 50px;
+  height: 50px;
+  border-radius: 20px;
+  border: none;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  display: flex;
+  font-size: 25px;
+  &:hover {
+    background-color: #ccc;
+  }
+`
 
 const Image = styled.img`
   width: 300px;
@@ -68,8 +83,8 @@ const ColorCode = styled.h5`
 `
 
 const ImageGroup = styled.div`
-  width: 100%;
   display: flex;
+  align-items: center;
 `
 const PickedColor = styled.div`
   width: 100px;
@@ -80,15 +95,23 @@ const PickedColor = styled.div`
 
 const ImageBtn = styled.button`
   width: 100px;
-  height: 2rem;
+  height: 2.5;
   color: #fff;
   background-color: #272727;
   border-radius: 20px;
   cursor: pointer;
+  transition: all 0.5s ease;
+  border: 1px solid #eeeeee;;
+  font-size: 16px;
+  font-weight: 800;
+  &:hover{
+    background-color: #171717;
+  }
 `
 
 const InputSection = styled.div`
   display: flex;
+  justify-content: center;
   width: 100%;
 `
 
@@ -121,8 +144,10 @@ const MainSection = styled.section`
 `
 
 const TextInput = styled.input`
-  width: 30%;
-  height: 1.5rem;
+  width: 40%;
+  height: 2rem;
   border-radius: 10px;
   margin-right: 10px;
+  font-size: 16px;
+  padding-left: 1rem;
 `
