@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 interface ColorModalProps {
   colorData: string[];
+  handleModalOpen: () => void;
 }
 
-const ColorModal: React.FC<ColorModalProps>  = ({colorData}) => {   
+const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) => {   
     return (
         <ModalWrapper>
           <ModalTitle>My Colors</ModalTitle>

@@ -6,7 +6,11 @@ import ColorModal from './component/colorModal.tsx';
 function App() {  
   const [colorData, setColorData] = useState<string[]>([]);
   const [imageUrl, setImageUrl] = useState<string>('');
-  const [modalToggle, setModalToggle] = useState<boolean>(true);
+  const [modalToggle, setModalToggle] = useState<boolean>(false);
+
+  const handleModalOpen = () => {
+    setModalToggle(!modalToggle);
+  }
 
   const handleColorsExtracted = (colors: string[]) => {
     setColorData(colors);
@@ -18,7 +22,11 @@ function App() {
 
   return (
     <MainSection>
-      <ColorModal colorData={colorData}></ColorModal>
+            {modalToggle && (
+        <Overlay onClick={handleModalOpen}>
+          <ColorModal colorData={colorData} handleModalOpen={handleModalOpen}/>
+        </Overlay>
+      )}
       <TextSection>
         <Title>외부 이미지 주소 넣기</Title>
         <InputSection>
@@ -35,7 +43,7 @@ function App() {
         <PickedColor style={{ backgroundColor: color }} />
         </ColorWrapper>
       ))}
-      <ColorDownBtn>얍!</ColorDownBtn>
+      <ColorDownBtn onClick={handleModalOpen}>얍!</ColorDownBtn>
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
     </MainSection>
@@ -43,6 +51,19 @@ function App() {
 }
 
 export default App;
+
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+`;
 
 const ColorDownBtn = styled.button`
   width: 50px;
