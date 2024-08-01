@@ -6,6 +6,7 @@ import ColorModal from './component/colorModal.tsx';
 function App() {  
   const [colorData, setColorData] = useState<string[]>([]);
   const [imageUrl, setImageUrl] = useState<string>('');
+  const [modalToggle, setModalToggle] = useState<boolean>(true);
 
   const handleColorsExtracted = (colors: string[]) => {
     setColorData(colors);
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <MainSection>
+      <ColorModal colorData={colorData}></ColorModal>
       <TextSection>
         <Title>외부 이미지 주소 넣기</Title>
         <InputSection>
