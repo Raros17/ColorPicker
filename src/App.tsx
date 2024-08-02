@@ -20,6 +20,11 @@ function App() {
     setImageUrl(event.target.value);
   };
 
+  const handleDataDelete = () => {
+    setImageUrl("")
+    setColorData([])
+  }
+
   return (
     <MainSection>
             {modalToggle && (
@@ -30,7 +35,11 @@ function App() {
       <TextSection>
         <Title>외부 이미지 주소 넣기</Title>
         <InputSection>
-          <TextInput type="text" value={imageUrl} onChange={handleInputChange} ></TextInput>
+          <InputTypeSection>
+            <TextInput type="text" value={imageUrl} onChange={handleInputChange}
+            ></TextInput>
+            <TextDeleteBtn onClick={handleDataDelete}>X</TextDeleteBtn>
+          </InputTypeSection>
           <ImageBtn>뽑기!</ImageBtn>
         </InputSection>
         {imageUrl && <Image src={imageUrl} alt="Selected" />}
@@ -51,6 +60,28 @@ function App() {
 }
 
 export default App;
+
+const TextDeleteBtn = styled.button`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  font-weight: 500;
+  &:hover {
+    background-color: #d2d2d2;
+  }
+`
+
+const InputTypeSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width : 100%;
+`
 
 const Overlay = styled.div`
   position: fixed;
@@ -140,7 +171,7 @@ const ImageBtn = styled.button`
 const InputSection = styled.div`
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 60%;
 `
 
 const TextSection = styled.section`
@@ -172,7 +203,7 @@ const MainSection = styled.section`
 `
 
 const TextInput = styled.input`
-  width: 40%;
+  width: 100%;
   height: 2rem;
   border-radius: 10px;
   margin-right: 10px;
