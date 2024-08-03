@@ -42,7 +42,7 @@ function App() {
           </InputTypeSection>
           <ImageBtn>뽑기!</ImageBtn>
         </InputSection>
-        {imageUrl && <Image src={imageUrl} alt="Selected" />}
+        {imageUrl ? <Image src={imageUrl} alt="Selected" /> : <PlaceholderImage />}
       </TextSection>
       
       <ImageGroup>
@@ -60,6 +60,14 @@ function App() {
 }
 
 export default App;
+
+const PlaceholderImage = styled.div`
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  background-color: #1b1a1a; 
+  margin-top: 20px;
+`
 
 const TextDeleteBtn = styled.button`
   width: 30px;
