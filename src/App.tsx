@@ -50,7 +50,7 @@ function App() {
         <PickedColor style={{ backgroundColor: color }} />
         </ColorWrapper>
       ))}
-      <ColorDownBtn onClick={handleModalOpen}>얍!</ColorDownBtn>
+      {imageUrl && <ColorDownBtn onClick={handleModalOpen}>얍!</ColorDownBtn>}
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
     </MainSection>
