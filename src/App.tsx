@@ -28,9 +28,7 @@ function App() {
   return (
     <MainSection>
             {modalToggle && (
-        <Overlay onClick={handleModalOpen}>
           <ColorModal colorData={colorData} handleModalOpen={handleModalOpen}/>
-        </Overlay>
       )}
       <TextSection>
         <Title>외부 이미지 주소 넣기</Title>
@@ -91,18 +89,6 @@ const InputTypeSection = styled.div`
   width : 100%;
 `
 
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-`;
 
 const ColorDownBtn = styled.button`
   width: 50px;

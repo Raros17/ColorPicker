@@ -7,7 +7,17 @@ interface ColorModalProps {
 }
 
 const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) => {   
+  const handleCopyColorText = async() => {
+    const combinedText = colorData.join('\n');
+    try {
+      await navigator.clipboard.writeText(combinedText);
+      alert('색상 코드가 복사되었습니다.');
+    } catch (err) {
+      console.error('텍스트 복사에 실패했습니다:', err);
+    }
+  }
     return (
+      <>
         <ModalWrapper>
           <ModalTitle>My Colors</ModalTitle>
       {colorData.map((color, idx) => (
@@ -16,12 +26,56 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
           <ColorTag>{color}</ColorTag>          
         </ColorDataList>
       ))}
+      <DownBtnWrapper>
+        <DownloadTextBtn onClick={handleCopyColorText}>Text</DownloadTextBtn>
+        <DownloadImgBtn>Img</DownloadImgBtn>
+      </DownBtnWrapper>
         </ModalWrapper>
+        <Overlay onClick={handleModalOpen}/>
+        </>
+        
     )
   };
   
   export default ColorModal;
 
+  const DownBtnWrapper = styled.div`
+    display: flex;
+  `
+
+  const DownloadImgBtn = styled.button`
+    background-color: #d8d8d8;
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.1s ease;
+    margin: 15px 10px 0 10px;
+    &:hover{
+      background-color: #ffffff;;
+    }
+  `
+
+  const DownloadTextBtn = styled(DownloadImgBtn)`
+    background-color:#ececec;
+  `
+
+  
+    const Overlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    cursor: pointer;
+  `;
   const ModalTitle = styled.h4`
     font-size: 25px;
     font-weight: 800;
