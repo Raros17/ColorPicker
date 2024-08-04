@@ -41,11 +41,14 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
 
   const DownBtnWrapper = styled.div`
     display: flex;
+    width: 100%;
+    justify-content: center;
   `
 
   const DownloadImgBtn = styled.button`
     background-color: #d8d8d8;
-    width: 150px;
+    width: 80%;
+    max-width: 150px;
     height: 40px;
     font-size: 16px;
     font-weight: 800;
