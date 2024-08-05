@@ -1,7 +1,11 @@
 import styled from 'styled-components';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import ColorTheif from './component/colorTheif.tsx';
 import ColorModal from './component/colorModal.tsx';
+
+interface TextSectionProps {
+  colorData: string[];
+}
 
 function App() {  
   const [colorData, setColorData] = useState<string[]>([]);
@@ -21,21 +25,20 @@ function App() {
   };
 
   const handleDataDelete = () => {
-    setImageUrl("")
-    setColorData([])
+    setImageUrl("");
+    setColorData([]);
   }
 
   return (
-    <MainSection>
-            {modalToggle && (
-          <ColorModal colorData={colorData} handleModalOpen={handleModalOpen}/>
+    <MainSection colorData={colorData || []}>
+      {modalToggle && (
+        <ColorModal colorData={colorData} handleModalOpen={handleModalOpen} />
       )}
-      <TextSection>
+      <TextSection colorData={colorData || []}>
         <Title>외부 이미지 주소 넣기</Title>
         <InputSection>
           <InputTypeSection>
-            <TextInput type="text" value={imageUrl} onChange={handleInputChange}
-            ></TextInput>
+            <TextInput type="text" value={imageUrl} onChange={handleInputChange} />
             <TextDeleteBtn onClick={handleDataDelete}>X</TextDeleteBtn>
           </InputTypeSection>
           <ImageBtn>뽑기!</ImageBtn>
@@ -44,13 +47,13 @@ function App() {
       </TextSection>
       
       <ImageGroup>
-      {colorData?.map((color, idx) => (
-        <ColorWrapper key={idx}>
-        <ColorCode>{color}</ColorCode>
-        <PickedColor style={{ backgroundColor: color }} />
-        </ColorWrapper>
-      ))}
-      {imageUrl && <ColorDownBtn onClick={handleModalOpen}>얍!</ColorDownBtn>}
+        {colorData?.map((color, idx) => (
+          <ColorWrapper key={idx}>
+            <ColorCode>{color}</ColorCode>
+            <PickedColor style={{ backgroundColor: color }} />
+          </ColorWrapper>
+        ))}
+        {imageUrl && <ColorDownBtn onClick={handleModalOpen}>얍!</ColorDownBtn>}
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
     </MainSection>
@@ -88,7 +91,6 @@ const InputTypeSection = styled.div`
   position: relative;
   width : 100%;
 `
-
 
 const ColorDownBtn = styled.button`
   width: 50px;
@@ -132,13 +134,13 @@ const ColorCode = styled.h5`
   background-color: rgba(0, 0, 0, 0.3);
   text-align: center;
   position: absolute;
-
 `
 
 const ImageGroup = styled.div`
   display: flex;
   align-items: center;
 `
+
 const PickedColor = styled.div`
   width: 100px;
   height: 50px;
@@ -154,7 +156,7 @@ const ImageBtn = styled.button`
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.5s ease;
-  border: 1px solid #eeeeee;;
+  border: 1px solid #eeeeee;
   font-size: 16px;
   font-weight: 800;
   &:hover{
@@ -168,9 +170,10 @@ const InputSection = styled.div`
   width: 60%;
 `
 
-const TextSection = styled.section`
+const TextSection = styled.section<TextSectionProps>`
   width: 80%;
-  background-color: #212121;
+  background: ${({ colorData }) =>
+    colorData.length > 0 ? `linear-gradient(to right, ${colorData[0]}, ${colorData[1]})` : '#212121'};
   border-radius: 20px;
   padding: 20px;
   display: flex;
@@ -186,15 +189,16 @@ const Title = styled.h1`
   margin-bottom: 10px;
 `
 
-const MainSection = styled.section`
+const MainSection = styled.section<TextSectionProps>`
   width: 100%;
   height: 100vh;
-  background-color: #444444;
+  background: ${({ colorData }) =>
+    colorData.length > 0 ? `radial-gradient(circle, ${colorData[1]}, ${colorData[0]})` : '#444444'};
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`
+`;
 
 const TextInput = styled.input`
   width: 100%;
