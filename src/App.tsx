@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ColorTheif from './component/colorTheif.tsx';
 import ColorModal from './component/colorModal.tsx';
 
@@ -11,6 +11,8 @@ function App() {
   const [colorData, setColorData] = useState<string[]>([]);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [modalToggle, setModalToggle] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
 
   const handleModalOpen = () => {
     setModalToggle(!modalToggle);
@@ -20,13 +22,16 @@ function App() {
     setColorData(colors);
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setImageUrl(event.target.value);
+  const handleButtonClick = () => {
+    if (inputRef.current) {
+      setImageUrl(inputRef.current.value);
+    }
   };
 
   const handleDataDelete = () => {
-    setImageUrl("");
-    setColorData([]);
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
   }
 
   return (
@@ -38,10 +43,11 @@ function App() {
         <Title>외부 이미지 주소 넣기</Title>
         <InputSection>
           <InputTypeSection>
-            <TextInput type="text" value={imageUrl} onChange={handleInputChange} />
+            <TextInput type="text" 
+              defaultValue="" ref={inputRef} placeholder='이미지 주소를 넣으면 멋진 색상을 뽑아드립니다.'/>
             <TextDeleteBtn onClick={handleDataDelete}>X</TextDeleteBtn>
           </InputTypeSection>
-          <ImageBtn>뽑기!</ImageBtn>
+          <ImageBtn onClick={handleButtonClick}>뽑기!</ImageBtn>
         </InputSection>
         {imageUrl ? <Image src={imageUrl} alt="Selected" /> : <PlaceholderImage />}
       </TextSection>
