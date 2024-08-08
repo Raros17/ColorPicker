@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import html2canvas from 'html2canvas';
 
 interface ColorModalProps {
   colorData: string[];
@@ -16,19 +17,33 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
       console.error('텍스트 복사에 실패했습니다:', err);
     }
   }
+
+  const handleDownloadImage = ()=>{
+    const modalElement = document.getElementById('modal');
+    if(modalElement) {
+      html2canvas(modalElement).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'color-palette-image.png';
+        link.click();
+      })
+    }
+  }
     return (
       <>
-        <ModalWrapper>
-          <ModalTitle>My Colors</ModalTitle>
-      {colorData.map((color, idx) => (
-        <ColorDataList key={idx}>
-          <ColorCircle style={{ backgroundColor: color }}/>
-          <ColorTag>{color}</ColorTag>          
-        </ColorDataList>
-      ))}
+        <ModalWrapper >
+          <ModalTextWrapper id='modal'>
+            <ModalTitle>My Colors</ModalTitle>
+                  {colorData.map((color, idx) => (
+                    <ColorDataList key={idx}>
+            <ColorCircle style={{ backgroundColor: color }}/>
+            <ColorTag>{color}</ColorTag>          
+                    </ColorDataList>
+                  ))}
+          </ModalTextWrapper>
       <DownBtnWrapper>
         <DownloadTextBtn onClick={handleCopyColorText}>Text</DownloadTextBtn>
-        <DownloadImgBtn>Img</DownloadImgBtn>
+        <DownloadImgBtn onClick={handleDownloadImage}>Img</DownloadImgBtn>
       </DownBtnWrapper>
         </ModalWrapper>
         <Overlay onClick={handleModalOpen}/>
@@ -38,6 +53,17 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
   };
   
   export default ColorModal;
+
+  const ModalTextWrapper = styled.div`
+    padding: 15px 0;
+    background-color: inherit;
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  `
 
   const DownBtnWrapper = styled.div`
     display: flex;
