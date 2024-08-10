@@ -179,14 +179,14 @@ const InputSection = styled.div`
 const TextSection = styled.section<TextSectionProps>`
   width: 80%;
   background: ${({ colorData }) =>
-    colorData.length > 0 ? `linear-gradient(to right, ${colorData[0]}, ${colorData[1]})` : '#212121'};
+    getBackgroundGradient(colorData, '#212121')};
   border-radius: 20px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const Title = styled.h1`
   font-size: 20px;
@@ -199,7 +199,7 @@ const MainSection = styled.section<TextSectionProps>`
   width: 100%;
   height: 100vh;
   background: ${({ colorData }) =>
-    colorData.length > 0 ? `radial-gradient(circle, ${colorData[1]}, ${colorData[0]})` : '#444444'};
+    getBackgroundGradient(colorData, '#444444')};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -214,3 +214,10 @@ const TextInput = styled.input`
   font-size: 16px;
   padding-left: 1rem;
 `
+
+const getBackgroundGradient = (colorData: string[], fallbackColor: string) => {
+  if (colorData.length > 1) {
+    return `linear-gradient(to right, ${colorData[0]}, ${colorData[1]})`;
+  }
+  return fallbackColor;
+};
