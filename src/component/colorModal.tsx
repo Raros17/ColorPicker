@@ -69,6 +69,7 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
     display: flex;
     width: 100%;
     justify-content: center;
+    word-break: keep-all;    
   `
 
   const DownloadImgBtn = styled.button`
@@ -76,8 +77,8 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
     width: 80%;
     max-width: 150px;
     height: 40px;
-    font-size: 16px;
-    font-weight: 800;
+    font-weight: 800;    
+    font-size: 15px;
     cursor: pointer;
     border-radius: 20px;
     transition: all 0.1s ease;

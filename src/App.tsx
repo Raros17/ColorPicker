@@ -57,7 +57,7 @@ function App() {
             <PickedColor style={{ backgroundColor: color }} />
           </ColorWrapper>
         ))}
-        {imageUrl && <ColorDownBtn onClick={handleModalOpen}>얍!</ColorDownBtn>}
+        {imageUrl && <ColorDownBtn onClick={handleModalOpen}>저장</ColorDownBtn>}
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
     </MainSection>
@@ -97,7 +97,6 @@ const InputTypeSection = styled.div`
 `
 
 const ColorDownBtn = styled.button`
-  width: 50px;
   height: 50px;
   border-radius: 20px;
   border: none;
@@ -110,6 +109,7 @@ const ColorDownBtn = styled.button`
   font-weight: 800;
   background-color: #262626;
   color: #fff;
+  padding: 0 1rem;
   &:hover {
     background-color: #101010;
   }
@@ -143,6 +143,9 @@ const ColorCode = styled.h5`
 const ImageGroup = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap; 
+  justify-content: center;
+  width: 100%;
 `
 
 const PickedColor = styled.div`
@@ -194,7 +197,7 @@ const Title = styled.h1`
 `
 
 const MainSection = styled.section<TextSectionProps>`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background: ${({ colorData }) =>
     getBackgroundGradient(colorData, '#444444')};
