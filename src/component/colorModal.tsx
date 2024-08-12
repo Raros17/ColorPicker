@@ -42,8 +42,8 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
                   ))}
           </ModalTextWrapper>
       <DownBtnWrapper>
-        <DownloadTextBtn onClick={handleCopyColorText}>Text</DownloadTextBtn>
-        <DownloadImgBtn onClick={handleDownloadImage}>Img</DownloadImgBtn>
+        <DownloadTextBtn onClick={handleCopyColorText}>텍스트 복사</DownloadTextBtn>
+        <DownloadImgBtn onClick={handleDownloadImage}>이미지 저장</DownloadImgBtn>
       </DownBtnWrapper>
         </ModalWrapper>
         <Overlay onClick={handleModalOpen}/>
@@ -123,6 +123,7 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
     margin-right: 10px;
     height: 30px;
     border-radius: 10px;
+    border: 1px solid #fff;
   `
 
   const ColorDataList = styled.ul`

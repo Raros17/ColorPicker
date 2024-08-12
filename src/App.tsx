@@ -36,9 +36,7 @@ function App() {
 
   return (
     <MainSection colorData={colorData || []}>
-      {modalToggle && (
-        <ColorModal colorData={colorData} handleModalOpen={handleModalOpen} />
-      )}
+      {modalToggle && <ColorModal colorData={colorData} handleModalOpen={handleModalOpen} />}
       <TextSection colorData={colorData || []}>
         <Title>외부 이미지 주소 넣기</Title>
         <InputSection>
