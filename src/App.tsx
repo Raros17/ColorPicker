@@ -12,6 +12,7 @@ function App() {
   const [imageUrl, setImageUrl] = useState<string>('');
   const [modalToggle, setModalToggle] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  console.log(colorData)
 
 
   const handleModalOpen = () => {
@@ -24,8 +25,23 @@ function App() {
 
   const handleButtonClick = () => {
     if (inputRef.current) {
-      setImageUrl(inputRef.current.value);
-    }
+      const url = inputRef.current.value;
+      loadImage(url);
+    };
+
+  };
+
+  const loadImage = (url: string) => {
+    const img = new Image();
+    img.src = url;
+    img.onload = () => {
+      setImageUrl(url);
+    };
+    img.onerror = () => {
+      setImageUrl('');
+      setColorData([]);
+      alert("올바른 이미지 주소를 넣어주세요!");
+    };
   };
 
   const handleDataDelete = () => {
@@ -47,7 +63,11 @@ function App() {
           </InputTypeSection>
           <ImageBtn onClick={handleButtonClick}>뽑기!</ImageBtn>
         </InputSection>
-        {imageUrl ? <Image src={imageUrl} alt="Selected" /> : <PlaceholderImage />}
+        {imageUrl && colorData.length > 0 ? (
+          <StyledImage  src={imageUrl} alt="Selected" />
+        ) : (
+          <PlaceholderImage />
+        )}
       </TextSection>
       
       <ImageGroup>
@@ -57,7 +77,7 @@ function App() {
             <PickedColor style={{ backgroundColor: color }} />
           </ColorWrapper>
         ))}
-        {imageUrl && <ColorDownBtn onClick={handleModalOpen}>저장</ColorDownBtn>}
+        {colorData.length > 0  && <ColorDownBtn onClick={handleModalOpen}>저장</ColorDownBtn>}
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
     </MainSection>
@@ -115,7 +135,7 @@ const ColorDownBtn = styled.button`
   }
 `
 
-const Image = styled.img`
+const StyledImage = styled.img`
   width: 300px;
   height: 300px;
   border-radius: 10px;
