@@ -11,8 +11,8 @@ function App() {
   const [colorData, setColorData] = useState<string[]>([]);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [modalToggle, setModalToggle] = useState<boolean>(false);
+  const [copiedColors, setCopiedColors] = useState<{ [key: number]: boolean }>({});
   const inputRef = useRef<HTMLInputElement>(null);
-  console.log(colorData)
 
 
   const handleModalOpen = () => {
@@ -50,6 +50,15 @@ function App() {
     }
   }
 
+  const handleColorCodeClick = (color: string, index: number) => {
+    navigator.clipboard.writeText(color).then(() => {
+      setCopiedColors(prev => ({ ...prev, [index]: true }));
+      setTimeout(() => {
+        setCopiedColors(prev => ({ ...prev, [index]: false }));
+      }, 3000);
+    });
+  };
+
   return (
     <MainSection colorData={colorData || []}>
       {modalToggle && <ColorModal colorData={colorData} handleModalOpen={handleModalOpen} />}
@@ -73,11 +82,15 @@ function App() {
       <ImageGroup>
         {colorData?.map((color, idx) => (
           <ColorWrapper key={idx}>
-            <ColorCode>{color}</ColorCode>
+            <ColorCode
+              onClick={() => handleColorCodeClick(color, idx)}
+            >
+              {copiedColors[idx] ? 'Copied!' : color}
+            </ColorCode>
             <PickedColor style={{ backgroundColor: color }} />
           </ColorWrapper>
         ))}
-        {colorData.length > 0  && <ColorDownBtn onClick={handleModalOpen}>저장</ColorDownBtn>}
+        {colorData.length > 0  && <ColorDownBtn onClick={handleModalOpen}>전체 저장</ColorDownBtn>}
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
     </MainSection>
@@ -157,7 +170,8 @@ const ColorCode = styled.h5`
   font-weight: 800;
   background-color: rgba(0, 0, 0, 0.3);
   text-align: center;
-  position: absolute;
+  position: absolute;  
+  cursor: pointer;
 `
 
 const ImageGroup = styled.div`
