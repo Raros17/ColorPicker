@@ -144,4 +144,7 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    @media (max-width: 800px) {
+      width: 70%;
+}
   `

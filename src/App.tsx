@@ -172,6 +172,10 @@ const ColorCode = styled.h5`
   text-align: center;
   position: absolute;  
   cursor: pointer;
+  @media (max-width: 800px) {
+    display:none
+}
+  
 `
 
 const ImageGroup = styled.div`
@@ -187,6 +191,9 @@ const PickedColor = styled.div`
   height: 50px;
   border-radius: 20px;
   margin: 5px;
+  @media (max-width: 800px) {
+  width: 30px;
+}
 `
 
 const ImageBtn = styled.button`
@@ -232,7 +239,7 @@ const Title = styled.h1`
 
 const MainSection = styled.section<TextSectionProps>`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh; 
   background: ${({ colorData }) =>
     getBackgroundGradient(colorData, '#444444')};
   display: flex;
