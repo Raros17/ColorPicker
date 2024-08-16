@@ -54,7 +54,7 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
   
   export default ColorModal;
 
-  const ModalTextWrapper = styled.div`
+const ModalTextWrapper = styled.div`
     padding: 15px 0;
     background-color: inherit;
     width: 100%;
@@ -70,6 +70,9 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
     width: 100%;
     justify-content: center;
     word-break: keep-all;    
+    padding-bottom: 1rem;
+    background-color: inherit;
+    border-radius: 20px;    
   `
 
   const DownloadImgBtn = styled.button`
@@ -93,7 +96,7 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
   `
 
   
-    const Overlay = styled.div`
+const Overlay = styled.div`
     position: fixed;
     top: 0;
     left: 0;
@@ -114,7 +117,7 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
 
   const ColorTag = styled.li`
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
     font-weight: 800;
     width: 100px;
   `
@@ -122,7 +125,7 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
   const ColorCircle = styled.div`
     width: 40px;
     margin-right: 10px;
-    height: 30px;
+    height: 80%;
     border-radius: 10px;
     border: 1px solid #fff;
   `

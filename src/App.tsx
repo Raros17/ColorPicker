@@ -55,7 +55,7 @@ function App() {
       setCopiedColors(prev => ({ ...prev, [index]: true }));
       setTimeout(() => {
         setCopiedColors(prev => ({ ...prev, [index]: false }));
-      }, 3000);
+      }, 2000);
     });
   };
 
@@ -146,6 +146,10 @@ const ColorDownBtn = styled.button`
   &:hover {
     background-color: #101010;
   }
+  @media (max-width: 800px) {
+  width: 70px;
+  font-size: 15px;
+}
 `
 
 const StyledImage = styled.img`
