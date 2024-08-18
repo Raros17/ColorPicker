@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React, { useState, useRef } from 'react';
 import ColorTheif from './component/colorTheif.tsx';
 import ColorModal from './component/colorModal.tsx';
+import ColorCodes from './ColorCode.tsx';
 
 interface TextSectionProps {
   colorData: string[];
@@ -81,14 +82,13 @@ function App() {
       
       <ImageGroup>
         {colorData?.map((color, idx) => (
-          <ColorWrapper key={idx}>
-            <ColorCode
-              onClick={() => handleColorCodeClick(color, idx)}
-            >
-              {copiedColors[idx] ? 'Copied!' : color}
-            </ColorCode>
-            <PickedColor style={{ backgroundColor: color }} />
-          </ColorWrapper>
+          <ColorCodes
+          key={idx}
+          color={color}
+          index={idx}
+          copiedColors={copiedColors}
+          setCopiedColors={setCopiedColors}
+        />
         ))}
         {colorData.length > 0  && <ColorDownBtn onClick={handleModalOpen}>전체 저장</ColorDownBtn>}
       </ImageGroup>
@@ -160,28 +160,6 @@ const StyledImage = styled.img`
   margin-top: 20px;
 `
 
-const ColorWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  position:relative;
-`
-
-const ColorCode = styled.h5`
-  color: #fff;
-  font-weight: 800;
-  background-color: rgba(0, 0, 0, 0.3);
-  text-align: center;
-  position: absolute;  
-  cursor: pointer;
-  @media (max-width: 800px) {
-    display:none
-}
-  
-`
-
 const ImageGroup = styled.div`
   display: flex;
   align-items: center;
@@ -190,15 +168,6 @@ const ImageGroup = styled.div`
   width: 100%;
 `
 
-const PickedColor = styled.div`
-  width: 100px;
-  height: 50px;
-  border-radius: 20px;
-  margin: 5px;
-  @media (max-width: 800px) {
-  width: 30px;
-}
-`
 
 const ImageBtn = styled.button`
   width: 100px;
