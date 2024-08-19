@@ -91,6 +91,7 @@ const ColorDownBtn = styled.button`
   background-color: #262626;
   color: #fff;
   padding: 0 1rem;
+  font-family: 'TheJamsil5Bold';
   &:hover {
     background-color: #101010;
   }
@@ -110,8 +111,6 @@ const ImageGroup = styled.div`
 `
 
 
-
-
 const TextSection = styled.section<TextSectionProps>`
   width: 80%;
   background: ${({ colorData }) =>
@@ -129,6 +128,7 @@ const Title = styled.h1`
   font-weight: 700;
   color: white;
   margin-bottom: 10px;
+  font-family : 'HSSanTokki20-Regular';
 `
 
 const MainSection = styled.section<TextSectionProps>`

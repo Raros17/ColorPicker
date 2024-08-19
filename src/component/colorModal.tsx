@@ -63,6 +63,7 @@ const ModalTextWrapper = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-family: 'TheJamsil5Bold';
   `
 
   const DownBtnWrapper = styled.div`
@@ -86,6 +87,7 @@ const ModalTextWrapper = styled.div`
     border-radius: 20px;
     transition: all 0.1s ease;
     margin: 15px 10px 0 10px;
+    font-family: 'TheJamsil5Bold';
     &:hover{
       background-color: #ffffff;;
     }

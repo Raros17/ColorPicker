@@ -39,6 +39,7 @@ const ColorWrapper = styled.div`
   align-items: center;
   margin: 10px;
   position:relative;
+  font-family: 'TheJamsil5Bold';
 `
 
 const ColorCode = styled.h5`
