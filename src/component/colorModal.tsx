@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 
@@ -8,11 +8,14 @@ interface ColorModalProps {
 }
 
 const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) => {   
+  const [copySuccess, setCopySuccess] = useState<boolean>(false);
+
   const handleCopyColorText = async() => {
     const combinedText = colorData.join('\n');
     try {
       await navigator.clipboard.writeText(combinedText);
-      alert('색상 코드가 복사되었습니다.');
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
     } catch (err) {
       console.error('텍스트 복사에 실패했습니다:', err);
     }
@@ -42,8 +45,8 @@ const ColorModal: React.FC<ColorModalProps>  = ({colorData, handleModalOpen}) =>
                   ))}
           </ModalTextWrapper>
       <DownBtnWrapper>
-        <DownloadTextBtn onClick={handleCopyColorText}>텍스트 복사</DownloadTextBtn>
-        <DownloadImgBtn onClick={handleDownloadImage}>이미지 저장</DownloadImgBtn>
+        <DownloadTextBtn onClick={handleCopyColorText}> {copySuccess ? '복사 성공!' : '전체 텍스트 복사'}</DownloadTextBtn>
+        <DownloadImgBtn onClick={handleDownloadImage}>이미지로 저장</DownloadImgBtn>
       </DownBtnWrapper>
         </ModalWrapper>
         <Overlay onClick={handleModalOpen}/>

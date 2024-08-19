@@ -9,7 +9,7 @@ interface ColorCodeProps {
 
 const ColorCodes: React.FC<ColorCodeProps> = ({ color, index, copiedColors, setCopiedColors }) => {
 
-  const handleColorCodeClick = () => {
+const handleColorCodeClick = () => {
     navigator.clipboard.writeText(color).then(() => {
       setCopiedColors(prev => ({ ...prev, [index]: true }));
       setTimeout(() => {
