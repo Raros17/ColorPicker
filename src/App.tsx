@@ -25,6 +25,11 @@ function App() {
     setColorData(colors);
   };
 
+   const handleImageUrl = (url: string) => { 
+    const proxyUrl = '/api/cors-proxy?url=';
+    setImageUrl(proxyUrl + encodeURIComponent(url)); 
+  }
+
   return (
     <MainSection colorData={colorData || []}>
       {modalToggle && <ColorModal colorData={colorData} handleModalOpen={handleModalOpen} />}
@@ -32,7 +37,7 @@ function App() {
         <Title>외부 이미지 주소 넣기</Title>
         <ImageUploader
           inputRef={inputRef}
-          setImageUrl={setImageUrl}
+          handleImageUrl={handleImageUrl}
           setColorData={setColorData}
         />
          {imageUrl && colorData.length > 0 ? (

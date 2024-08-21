@@ -3,23 +3,20 @@ import styled from 'styled-components';
 
 interface ImageUploaderProps {
   inputRef: React.RefObject<HTMLInputElement>;
-  setImageUrl: React.Dispatch<React.SetStateAction<string>>;
+  handleImageUrl: (url: string) => void;
   setColorData: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, setImageUrl, setColorData }) => {
+const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleImageUrl, setColorData }) => {
 
   const loadImage = (url: string) => {
-    const proxyUrl = '/api/cors-proxy?url=';
-    const fullUrl = proxyUrl + encodeURIComponent(url);
-
     const img = new Image();
-    img.src = fullUrl;
+    img.src = url;
     img.onload = () => {
-      setImageUrl(fullUrl);
+        handleImageUrl(url);
     };
     img.onerror = () => {
-      setImageUrl('');
+      handleImageUrl('');
       setColorData([]);
       alert("올바른 이미지 주소를 넣어주세요!");
     };
