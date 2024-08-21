@@ -10,10 +10,13 @@ interface ImageUploaderProps {
 const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, setImageUrl, setColorData }) => {
 
   const loadImage = (url: string) => {
+    const proxyUrl = '/api/cors-proxy?url=';
+    const fullUrl = proxyUrl + encodeURIComponent(url);
+
     const img = new Image();
-    img.src = url;
+    img.src = fullUrl;
     img.onload = () => {
-      setImageUrl(url);
+      setImageUrl(fullUrl);
     };
     img.onerror = () => {
       setImageUrl('');
