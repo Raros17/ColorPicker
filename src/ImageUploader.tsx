@@ -5,11 +5,14 @@ interface ImageUploaderProps {
   inputRef: React.RefObject<HTMLInputElement>;
   handleImageUrl: (url: string) => void;
   setColorData: React.Dispatch<React.SetStateAction<string[]>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>; 
+  isLoading:boolean
 }
 
-const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleImageUrl, setColorData }) => {
+const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleImageUrl, setColorData, setIsLoading, isLoading }) => {
 
   const loadImage = (url: string) => {
+    setIsLoading(true);
     const img = new Image();
     img.src = url;
     img.onload = () => {
@@ -18,6 +21,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleImageUrl,
     img.onerror = () => {
       handleImageUrl('');
       setColorData([]);
+      setIsLoading(false);
       alert("올바른 이미지 주소를 넣어주세요!");
     };
   };
@@ -42,7 +46,9 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleImageUrl,
           defaultValue="" ref={inputRef} placeholder='이미지 주소를 넣으면 멋진 색상을 뽑아드립니다.'/>
         <TextDeleteBtn onClick={handleDataDelete}>X</TextDeleteBtn>
       </InputTypeSection>
-      <ImageBtn onClick={handleButtonClick}>뽑기!</ImageBtn>
+      <ImageBtn onClick={handleButtonClick} disabled={isLoading}>
+         {isLoading ? "로딩 중..." : "뽑기!"}
+      </ImageBtn>
     </InputSection>
   );
 }

@@ -14,6 +14,7 @@ function App() {
   const [imageUrl, setImageUrl] = useState<string>('');
   const [modalToggle, setModalToggle] = useState<boolean>(false);
   const [copiedColors, setCopiedColors] = useState<{ [key: number]: boolean }>({});
+  const [isLoading, setIsLoading] = useState<boolean>(false); 
   const inputRef = useRef<HTMLInputElement>(null);
 
 
@@ -23,6 +24,7 @@ function App() {
 
   const handleColorsExtracted = (colors: string[]) => {
     setColorData(colors);
+    setIsLoading(false);
   };
 
    const handleImageUrl = (url: string) => { 
@@ -39,6 +41,8 @@ function App() {
           inputRef={inputRef}
           handleImageUrl={handleImageUrl}
           setColorData={setColorData}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading} 
         />
          {imageUrl && colorData.length > 0 ? (
           <StyledImage  src={imageUrl} alt="Selected" />
