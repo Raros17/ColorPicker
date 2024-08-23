@@ -38,6 +38,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleProxyUrl,
     if (inputRef.current) {
       inputRef.current.value = "";
     }
+    setIsLoading(false);
   }
 
   return (
