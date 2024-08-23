@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
 
 interface ImageUploaderProps {
@@ -10,19 +10,25 @@ interface ImageUploaderProps {
 }
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleProxyUrl, setColorData, setIsLoading, isLoading }) => {
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleImageUrl = (url: string) => {
-    setIsLoading(true);
+    timeoutRef.current = setTimeout(() => {
+      setIsLoading(true);
+    }, 500);
+
     const img = new Image();
     img.src = url;
     img.onload = () => {
       handleProxyUrl(url);
         setIsLoading(false);
+        clearTimeout(timeoutRef.current!);
     };
     img.onerror = () => {
       handleProxyUrl('');
       setColorData([]);
       setIsLoading(false);
+      clearTimeout(timeoutRef.current!);
       alert("올바른 이미지 주소를 넣어주세요!");
     };
   };
@@ -38,6 +44,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleProxyUrl,
     if (inputRef.current) {
       inputRef.current.value = "";
     }
+    clearTimeout(timeoutRef.current!);
     setIsLoading(false);
   }
 
