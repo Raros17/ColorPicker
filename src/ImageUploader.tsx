@@ -3,23 +3,24 @@ import styled from 'styled-components';
 
 interface ImageUploaderProps {
   inputRef: React.RefObject<HTMLInputElement>;
-  handleImageUrl: (url: string) => void;
+  handleProxyUrl: (url: string) => void;
   setColorData: React.Dispatch<React.SetStateAction<string[]>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>; 
   isLoading:boolean
 }
 
-const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleImageUrl, setColorData, setIsLoading, isLoading }) => {
+const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleProxyUrl, setColorData, setIsLoading, isLoading }) => {
 
-  const loadImage = (url: string) => {
+  const handleImageUrl = (url: string) => {
     setIsLoading(true);
     const img = new Image();
     img.src = url;
     img.onload = () => {
-        handleImageUrl(url);
+      handleProxyUrl(url);
+        setIsLoading(false);
     };
     img.onerror = () => {
-      handleImageUrl('');
+      handleProxyUrl('');
       setColorData([]);
       setIsLoading(false);
       alert("올바른 이미지 주소를 넣어주세요!");
@@ -29,7 +30,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleImageUrl,
   const handleButtonClick = () => {
     if (inputRef.current) {
       const url = inputRef.current.value;
-      loadImage(url);
+      handleImageUrl(url);
     };
   };
 

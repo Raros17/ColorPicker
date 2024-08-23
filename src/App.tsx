@@ -27,7 +27,7 @@ function App() {
     setIsLoading(false);
   };
 
-   const handleImageUrl = (url: string) => { 
+   const handleProxyUrl = (url: string) => { 
     const proxyUrl = '/api/cors-proxy?url=';
     setImageUrl(proxyUrl + encodeURIComponent(url)); 
   }
@@ -39,7 +39,7 @@ function App() {
         <Title>외부 이미지 주소 넣기</Title>
         <ImageUploader
           inputRef={inputRef}
-          handleImageUrl={handleImageUrl}
+          handleProxyUrl={handleProxyUrl}
           setColorData={setColorData}
           setIsLoading={setIsLoading}
           isLoading={isLoading} 
