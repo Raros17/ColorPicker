@@ -53,7 +53,7 @@ function App() {
           isLoading={isLoading} 
           setIsImageValid={setIsImageValid}
         />
-         {imageUrl && !isImageValid ?  (
+         {imageUrl && isImageValid ?  (
           <StyledImage  src={imageUrl} alt="Selected" />
         ) : (
           <PlaceholderImage />
