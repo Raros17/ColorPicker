@@ -6,10 +6,11 @@ interface ImageUploaderProps {
   handleProxyUrl: (url: string) => void;
   setColorData: React.Dispatch<React.SetStateAction<string[]>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>; 
+  setIsImageValid : React.Dispatch<React.SetStateAction<boolean>>; 
   isLoading:boolean
 }
 
-const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleProxyUrl, setColorData, setIsLoading, isLoading }) => {
+const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleProxyUrl, setColorData, setIsLoading,setIsImageValid, isLoading }) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleImageUrl = (url: string) => {
@@ -22,6 +23,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleProxyUrl,
     img.onload = () => {
       handleProxyUrl(url);
         setIsLoading(false);
+        setIsImageValid(true);
         clearTimeout(timeoutRef.current!);
     };
     img.onerror = () => {
@@ -29,6 +31,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleProxyUrl,
       setColorData([]);
       setIsLoading(false);
       clearTimeout(timeoutRef.current!);
+      setIsImageValid(false);
       alert("올바른 이미지 주소를 넣어주세요!");
     };
   };

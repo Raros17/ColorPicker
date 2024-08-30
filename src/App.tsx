@@ -22,8 +22,9 @@ function App() {
   const [modalToggle, setModalToggle] = useState<boolean>(false);
   const [copiedColors, setCopiedColors] = useState<{ [key: number]: boolean }>({});
   const [isLoading, setIsLoading] = useState<boolean>(false); 
+  const [isImageValid, setIsImageValid] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-
+  
 
   const handleModalOpen = () => {
     setModalToggle(!modalToggle);
@@ -50,8 +51,9 @@ function App() {
           setColorData={setColorData}
           setIsLoading={setIsLoading}
           isLoading={isLoading} 
+          setIsImageValid={setIsImageValid}
         />
-         {imageUrl && colorData.length > 0 ? (
+         {imageUrl && !isImageValid ?  (
           <StyledImage  src={imageUrl} alt="Selected" />
         ) : (
           <PlaceholderImage />
