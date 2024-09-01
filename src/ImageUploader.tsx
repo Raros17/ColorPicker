@@ -51,11 +51,17 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleProxyUrl,
     setIsLoading(false);
   }
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleButtonClick();
+    }
+  };
+
   return (
     <InputSection>
       <InputTypeSection>
         <TextInput type="text" 
-          defaultValue="" ref={inputRef} placeholder='이미지 주소를 넣으면 멋진 색상을 뽑아드립니다.'/>
+          defaultValue="" ref={inputRef}  onKeyDown={handleKeyDown}  placeholder='이미지 주소를 넣으면 멋진 색상을 뽑아드립니다.'/>
         <TextDeleteBtn onClick={handleDataDelete}>X</TextDeleteBtn>
       </InputTypeSection>
       <ImageBtn onClick={handleButtonClick} disabled={isLoading}>
