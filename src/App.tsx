@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import React, { useState, useRef } from 'react';
 import ColorTheif from './component/colorTheif.tsx';
 import ColorModal from './component/colorModal.tsx';
-import ColorCodes from './ColorCode.tsx';
-import ImageUploader from './ImageUploader.tsx';
+import ColorCodes from './component/ColorCode.tsx';
+import ImageUploader from './component/ImageUploader.tsx';
 import { 
   PlaceholderImage, 
   StyledImage, 
