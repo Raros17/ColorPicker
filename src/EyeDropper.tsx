@@ -3,9 +3,10 @@ import React, { useRef, useEffect } from 'react';
 interface EyeDropperProps {
   imageUrl: string;
   onColorPick: (color: string) => void;
+  isActive: boolean;
 }
 
-const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick }) => {
+  const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isActive }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
 
@@ -24,6 +25,8 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick }) => {
   }, [imageUrl]);
 
   const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (!isActive) return; 
+
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
 
@@ -43,7 +46,7 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick }) => {
       <canvas
         ref={canvasRef}
         onClick={handleCanvasClick}
-        style={{ cursor: 'crosshair', display: 'none' }}
+        style={{ cursor: isActive ? 'crosshair' : 'default', display: 'none' }}
       />
       <img ref={imageRef} src={imageUrl} alt="Selected" style={{ display: 'none' }} />
     </div>

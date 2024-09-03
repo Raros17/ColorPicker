@@ -3,6 +3,7 @@ import ColorTheif from './component/colorTheif.tsx';
 import ColorModal from './component/colorModal.tsx';
 import ColorCodes from './component/ColorCode.tsx';
 import ImageUploader from './component/ImageUploader.tsx';
+import EyeDropper from './EyeDropper.tsx';
 import { 
   PlaceholderImage, 
   StyledImage, 
@@ -11,7 +12,8 @@ import {
   TextSection, 
   Title, 
   MainSection,
-  ShowSpoidColor
+  ShowSpoidColor,
+  SpoidButton
 } from './App.styled.ts'; 
 
 
@@ -23,6 +25,8 @@ function App() {
   const [copiedColors, setCopiedColors] = useState<{ [key: number]: boolean }>({});
   const [isLoading, setIsLoading] = useState<boolean>(false); 
   const [isImageValid, setIsImageValid] = useState<boolean>(false);
+  const [pickedColor, setPickedColor] = useState<string | null>(null);
+  const [isSpoidActive, setIsSpoidActive] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   
 
@@ -40,7 +44,13 @@ function App() {
     setImageUrl(proxyUrl + encodeURIComponent(url)); 
   }
 
-  
+  const handleColorPick = (color: string) => {
+    setPickedColor(color);
+  };  
+
+  const toggleSpoid = () => {
+    setIsSpoidActive(!isSpoidActive); 
+  };
 
 
   return (
@@ -61,8 +71,10 @@ function App() {
         ) : (
           <PlaceholderImage />
         )}
-        <ShowSpoidColor></ShowSpoidColor>
-
+        {pickedColor && <ShowSpoidColor style={{ backgroundColor: pickedColor }} />}
+        <SpoidButton onClick={toggleSpoid} isActive={isSpoidActive}>
+          {isSpoidActive ? '취소' : '스포이드'}
+        </SpoidButton>
       </TextSection>
       
       <ImageGroup>
@@ -78,6 +90,7 @@ function App() {
         {colorData.length > 0  && <ColorDownBtn onClick={handleModalOpen}>전체 저장</ColorDownBtn>}
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
+      {imageUrl && <EyeDropper imageUrl={imageUrl} onColorPick={handleColorPick} isActive={isSpoidActive}/>}
     </MainSection>
   );
 }

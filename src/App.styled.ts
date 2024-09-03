@@ -98,3 +98,17 @@ export const ShowSpoidColor = styled.div`
   height: 30px;
   background-color: aliceblue;
 `
+
+export const SpoidButton = styled.button<{ isActive: boolean }>`
+  background-color: ${({ isActive }) => (isActive ? '#3498db' : '#2ecc71')};
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: ${({ isActive }) => (isActive ? '#2980b9' : '#27ae60')};
+  }
+`;
