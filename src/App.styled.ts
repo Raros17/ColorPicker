@@ -92,3 +92,9 @@ export const getBackgroundGradient = (colorData: string[], fallbackColor: string
   }
   return fallbackColor;
 };
+
+export const ShowSpoidColor = styled.div`
+  width: 100%;
+  height: 30px;
+  background-color: aliceblue;
+`

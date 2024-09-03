@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import React, { useState, useRef } from 'react';
 import ColorTheif from './component/colorTheif.tsx';
 import ColorModal from './component/colorModal.tsx';
@@ -11,7 +10,8 @@ import {
   ImageGroup, 
   TextSection, 
   Title, 
-  MainSection 
+  MainSection,
+  ShowSpoidColor
 } from './App.styled.ts'; 
 
 
@@ -40,6 +40,9 @@ function App() {
     setImageUrl(proxyUrl + encodeURIComponent(url)); 
   }
 
+  
+
+
   return (
     <MainSection colorData={colorData || []}>
       {modalToggle && <ColorModal colorData={colorData} handleModalOpen={handleModalOpen} />}
@@ -58,6 +61,8 @@ function App() {
         ) : (
           <PlaceholderImage />
         )}
+        <ShowSpoidColor></ShowSpoidColor>
+
       </TextSection>
       
       <ImageGroup>

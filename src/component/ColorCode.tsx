@@ -1,5 +1,5 @@
 import React from 'react';
-import { ColorWrapper, ColorCode, PickedColor } from '../ColorCode.styled.ts';
+import { ColorWrapper, ColorCode, PickedColor } from './ColorCode.styled.ts';
 interface ColorCodeProps {
   color: string;
   index: number;

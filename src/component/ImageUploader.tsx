@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import { ImageBtn, InputSection, InputTypeSection, TextDeleteBtn, TextInput } from '../ImageUploader.styled.ts';
+import { ImageBtn, InputSection, InputTypeSection, TextDeleteBtn, TextInput } from './ImageUploader.styled.ts';
 
 interface ImageUploaderProps {
   inputRef: React.RefObject<HTMLInputElement>;
