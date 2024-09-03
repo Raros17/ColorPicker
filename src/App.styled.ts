@@ -96,7 +96,6 @@ export const getBackgroundGradient = (colorData: string[], fallbackColor: string
 export const ShowSpoidColor = styled.div`
   width: 100%;
   height: 30px;
-  background-color: aliceblue;
 `
 
 export const SpoidButton = styled.button<{ isActive: boolean }>`

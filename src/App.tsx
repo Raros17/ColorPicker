@@ -75,6 +75,7 @@ function App() {
         <SpoidButton onClick={toggleSpoid} isActive={isSpoidActive}>
           {isSpoidActive ? '취소' : '스포이드'}
         </SpoidButton>
+        <ShowSpoidColor style={{ backgroundColor: pickedColor || 'aliceblue' }}></ShowSpoidColor>
       </TextSection>
       
       <ImageGroup>
