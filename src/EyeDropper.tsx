@@ -3,10 +3,10 @@ import React, { useRef, useEffect } from 'react';
 interface EyeDropperProps {
   imageUrl: string;
   onColorPick: (color: string) => void;
-  isActive: boolean;
+  isActive: boolean; 
 }
 
-  const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isActive }) => {
+const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isActive }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
 
@@ -46,7 +46,7 @@ interface EyeDropperProps {
       <canvas
         ref={canvasRef}
         onClick={handleCanvasClick}
-        style={{ cursor: isActive ? 'crosshair' : 'default', display: 'none' }}
+        style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', display: 'none' }} // 스타일 설정
       />
       <img ref={imageRef} src={imageUrl} alt="Selected" style={{ display: 'none' }} />
     </div>
