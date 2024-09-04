@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react';
 interface EyeDropperProps {
   imageUrl: string;
   onColorPick: (color: string) => void;
-  isActive: boolean; 
+  isActive: boolean; // 스포이드 활성화 여부
 }
 
 const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isActive }) => {
@@ -25,7 +25,7 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isActive
   }, [imageUrl]);
 
   const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (!isActive) return; 
+    if (!isActive) return; // 스포이드 기능이 활성화되지 않았다면 클릭 무시
 
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');

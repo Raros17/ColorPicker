@@ -50,7 +50,6 @@ function App() {
 
   const toggleSpoid = () => {
     setIsSpoidActive(!isSpoidActive); 
-    setIsSpoidActive(false);
   };
 
 
@@ -73,7 +72,7 @@ function App() {
           <PlaceholderImage />
         )}
         {pickedColor && <ShowSpoidColor style={{ backgroundColor: pickedColor }} />}
-        <SpoidButton onClick={toggleSpoid} isActive={isSpoidActive}>
+        <SpoidButton onClick={toggleSpoid} isSpoidActive={isSpoidActive}>
           {isSpoidActive ? '활성화상태' : '스포이트ㄱㄱ'}
         </SpoidButton>
         <ShowSpoidColor style={{ backgroundColor: pickedColor || 'aliceblue' }}></ShowSpoidColor>

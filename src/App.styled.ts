@@ -98,16 +98,16 @@ export const ShowSpoidColor = styled.div`
   height: 30px;
 `
 
-export const SpoidButton = styled.button<{ isActive: boolean }>`
-  background-color: ${({ isActive }) => (isActive ? '#3498db' : '#2ecc71')};
+export const SpoidButton = styled.button<{ isSpoidActive: boolean }>`
+  background-color: ${({ isSpoidActive }) => (isSpoidActive ? "#BF3471" : '#666')};
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px;
   cursor: pointer;
   margin-top: 10px;
-  border-radius: 5px;
-
+  border-radius: 50%;
   &:hover {
-    background-color: ${({ isActive }) => (isActive ? '#2980b9' : '#27ae60')};
+    transition: all 0.2s ease;
+    background-color: ${({ isSpoidActive }) => (isSpoidActive ? '#A22D66' : '#555')};
   }
 `;
