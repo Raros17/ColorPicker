@@ -65,7 +65,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ inputRef, handleProxyUrl,
         <TextDeleteBtn onClick={handleDataDelete}>X</TextDeleteBtn>
       </InputTypeSection>
       <ImageBtn onClick={handleButtonClick} disabled={isLoading}>
-         {isLoading ? "로딩 중..." : "뽑기!"}
+         {isLoading ? "로딩 중..." : <i className="fa-solid fa-wand-sparkles"></i>}
       </ImageBtn>
     </InputSection>
   );

@@ -73,7 +73,7 @@ function App() {
         )}
         {pickedColor && <ShowSpoidColor style={{ backgroundColor: pickedColor }} />}
         <SpoidButton onClick={toggleSpoid} isSpoidActive={isSpoidActive}>
-          {isSpoidActive ? '활성화상태' : '스포이트ㄱㄱ'}
+         <i className="fa-solid fa-eye-dropper"></i>
         </SpoidButton>
         <ShowSpoidColor style={{ backgroundColor: pickedColor || 'aliceblue' }}></ShowSpoidColor>
       </TextSection>
@@ -88,7 +88,7 @@ function App() {
           setCopiedColors={setCopiedColors}
         />
         ))}
-        {colorData.length > 0  && <ColorDownBtn onClick={handleModalOpen}>전체 저장</ColorDownBtn>}
+        {colorData.length > 0  && <ColorDownBtn onClick={handleModalOpen}><i className="fa-solid fa-download"></i></ColorDownBtn>}
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
       {imageUrl && <EyeDropper imageUrl={imageUrl} onColorPick={handleColorPick} isActive={isSpoidActive}/>}

@@ -103,6 +103,7 @@ export const SpoidButton = styled.button<{ isSpoidActive: boolean }>`
   color: white;
   border: none;
   padding: 10px;
+  font-size: 16px;
   cursor: pointer;
   margin-top: 10px;
   border-radius: 50%;
