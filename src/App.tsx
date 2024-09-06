@@ -17,7 +17,6 @@ import {
 } from './App.styled.ts'; 
 
 
-
 function App() {  
   const [colorData, setColorData] = useState<string[]>([]);
   const [imageUrl, setImageUrl] = useState<string>('');
@@ -28,7 +27,7 @@ function App() {
   const [pickedColor, setPickedColor] = useState<string | null>(null);
   const [isSpoidActive, setIsSpoidActive] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  
+  console.log(`pickedColor은 ${pickedColor}`)
 
   const handleModalOpen = () => {
     setModalToggle(!modalToggle);
@@ -46,6 +45,7 @@ function App() {
 
   const handleColorPick = (color: string) => {
     setPickedColor(color);
+    setIsImageValid(false);
   };  
 
   const toggleSpoid = () => {
@@ -67,15 +67,16 @@ function App() {
           setIsImageValid={setIsImageValid}
         />
          {imageUrl && isImageValid ?  (
-          <StyledImage  src={imageUrl} alt="Selected" />
+          // <StyledImage  src={imageUrl} alt="Selected" />
+          <EyeDropper imageUrl={imageUrl} onColorPick={handleColorPick} isSpoidActive={isSpoidActive} />
         ) : (
           <PlaceholderImage />
         )}
-        {pickedColor && <ShowSpoidColor style={{ backgroundColor: pickedColor }} />}
+        {/* {pickedColor && <ShowSpoidColor />} */}
         <SpoidButton onClick={toggleSpoid} isSpoidActive={isSpoidActive}>
          <i className="fa-solid fa-eye-dropper"></i>
         </SpoidButton>
-        <ShowSpoidColor style={{ backgroundColor: pickedColor || 'aliceblue' }}></ShowSpoidColor>
+        <ShowSpoidColor style={{ backgroundColor: `${pickedColor}` || 'rgb(135,206,235)' }}></ShowSpoidColor>
       </TextSection>
       
       <ImageGroup>
@@ -91,7 +92,7 @@ function App() {
         {colorData.length > 0  && <ColorDownBtn onClick={handleModalOpen}><i className="fa-solid fa-download"></i></ColorDownBtn>}
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
-      {imageUrl && <EyeDropper imageUrl={imageUrl} onColorPick={handleColorPick} isActive={isSpoidActive}/>}
+      {imageUrl && <EyeDropper imageUrl={imageUrl} onColorPick={handleColorPick} isSpoidActive={isSpoidActive}/>}
     </MainSection>
   );
 }

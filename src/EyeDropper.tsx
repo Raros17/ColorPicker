@@ -3,10 +3,10 @@ import React, { useRef, useEffect } from 'react';
 interface EyeDropperProps {
   imageUrl: string;
   onColorPick: (color: string) => void;
-  isActive: boolean; // 스포이드 활성화 여부
+  isSpoidActive: boolean;
 }
 
-const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isActive }) => {
+const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidActive }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
 
@@ -24,8 +24,9 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isActive
     }
   }, [imageUrl]);
 
+
   const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (!isActive) return; // 스포이드 기능이 활성화되지 않았다면 클릭 무시
+    if (!isSpoidActive) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
@@ -43,10 +44,16 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isActive
 
   return (
     <div>
+      {/* 캔버스가 보이도록 수정 */}
       <canvas
         ref={canvasRef}
         onClick={handleCanvasClick}
-        style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', display: 'none' }} // 스타일 설정
+        style={{ 
+          border: '1px solid black', 
+          cursor: isSpoidActive ? 'crosshair' : 'default',
+          display: 'block',  // 캔버스를 화면에 표시
+          pointerEvents: isSpoidActive ? 'auto' : 'none'  // 스포이드 활성화 시만 클릭 가능
+        }}
       />
       <img ref={imageRef} src={imageUrl} alt="Selected" style={{ display: 'none' }} />
     </div>
