@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import styled from 'styled-components';
 
 interface EyeDropperProps {
   imageUrl: string;
@@ -43,7 +44,7 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidA
   };
 
   return (
-    <div>
+    <DropperImage>
       {/* 캔버스가 보이도록 수정 */}
       <canvas
         ref={canvasRef}
@@ -56,8 +57,17 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidA
         }}
       />
       <img ref={imageRef} src={imageUrl} alt="Selected" style={{ display: 'none' }} />
-    </div>
+    </DropperImage>
   );
 };
 
 export default EyeDropper;
+
+
+const DropperImage = styled.img`
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-top: 20px;
+`
