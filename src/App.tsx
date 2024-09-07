@@ -91,13 +91,13 @@ function App() {
         {colorData.length > 0  && <ColorDownBtn onClick={handleModalOpen}><i className="fa-solid fa-download"></i></ColorDownBtn>}
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
-      {imageUrl && (
+      {/* {imageUrl && (
         <EyeDropper 
           imageUrl={imageUrl} 
           onColorPick={handleColorPick} 
           isSpoidActive={isSpoidActive}
         />
-      )}
+      )} */}
     </MainSection>
   );
 }

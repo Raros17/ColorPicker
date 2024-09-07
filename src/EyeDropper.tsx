@@ -49,7 +49,7 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidA
   };
 
   return (
-    <DropperImage>
+    <DropperContainer>
       <canvas
         ref={canvasRef}
         onClick={handleCanvasClick}
@@ -61,14 +61,14 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidA
         }}
       />
       <img ref={imageRef} src={imageUrl} alt="Selected" style={{ display: 'none' }} />
-    </DropperImage>
+    </DropperContainer>
   );
 };
 
 export default EyeDropper;
 
 
-const DropperImage = styled.img`
+const DropperContainer = styled.div`
   width: 300px;
   height: 300px;
   border-radius: 10px;
