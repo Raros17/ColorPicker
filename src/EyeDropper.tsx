@@ -10,7 +10,12 @@ interface EyeDropperProps {
 const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidActive }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
-
+  const image = imageRef.current;
+  if (image && image.complete) {
+    console.log('Image loaded:', image.src);
+  } else {
+    console.log('Image failed to load');
+  }
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
@@ -45,15 +50,14 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidA
 
   return (
     <DropperImage>
-      {/* 캔버스가 보이도록 수정 */}
       <canvas
         ref={canvasRef}
         onClick={handleCanvasClick}
         style={{ 
           border: '1px solid black', 
           cursor: isSpoidActive ? 'crosshair' : 'default',
-          display: 'block',  // 캔버스를 화면에 표시
-          pointerEvents: isSpoidActive ? 'auto' : 'none'  // 스포이드 활성화 시만 클릭 가능
+          display: 'block', 
+          pointerEvents: isSpoidActive ? 'auto' : 'none' 
         }}
       />
       <img ref={imageRef} src={imageUrl} alt="Selected" style={{ display: 'none' }} />

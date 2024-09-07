@@ -44,11 +44,12 @@ function App() {
   }
 
   const handleColorPick = (color: string) => {
-    setPickedColor(color);
+    setPickedColor(color);  
+    setIsImageValid(false)
   };  
 
   const toggleSpoid = () => {
-    setIsSpoidActive(!isSpoidActive); 
+    setIsSpoidActive(!isSpoidActive);   
   };
 
 
