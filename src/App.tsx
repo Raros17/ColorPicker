@@ -45,7 +45,7 @@ function App() {
 
   const handleColorPick = (color: string) => {
     setPickedColor(color);  
-    setIsImageValid(false)
+    setIsSpoidActive(!isSpoidActive);  
   };  
 
   const toggleSpoid = () => {
@@ -91,6 +91,13 @@ function App() {
         {colorData.length > 0  && <ColorDownBtn onClick={handleModalOpen}><i className="fa-solid fa-download"></i></ColorDownBtn>}
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
+      {imageUrl && (
+        <EyeDropper 
+          imageUrl={imageUrl} 
+          onColorPick={handleColorPick} 
+          isSpoidActive={isSpoidActive}
+        />
+      )}
     </MainSection>
   );
 }
