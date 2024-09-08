@@ -27,7 +27,7 @@ function App() {
   const [pickedColor, setPickedColor] = useState<string | null>(null);
   const [isSpoidActive, setIsSpoidActive] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  console.log(`pickedColor은 ${pickedColor}`)
+  // console.log(`pickedColor은 ${pickedColor}`)
 
   const handleModalOpen = () => {
     setModalToggle(!modalToggle);
@@ -45,7 +45,6 @@ function App() {
 
   const handleColorPick = (color: string) => {
     setPickedColor(color);  
-    setIsSpoidActive(!isSpoidActive);  
   };  
 
   const toggleSpoid = () => {
@@ -91,13 +90,6 @@ function App() {
         {colorData.length > 0  && <ColorDownBtn onClick={handleModalOpen}><i className="fa-solid fa-download"></i></ColorDownBtn>}
       </ImageGroup>
       {imageUrl && <ColorTheif imageUrl={imageUrl} onColorsExtracted={handleColorsExtracted} />}
-      {/* {imageUrl && (
-        <EyeDropper 
-          imageUrl={imageUrl} 
-          onColorPick={handleColorPick} 
-          isSpoidActive={isSpoidActive}
-        />
-      )} */}
     </MainSection>
   );
 }

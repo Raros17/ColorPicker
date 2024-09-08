@@ -10,12 +10,11 @@ interface EyeDropperProps {
 const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidActive }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
-  const image = imageRef.current;
-  if (image && image.complete) {
-    console.log('Image loaded:', image.src);
-  } else {
-    console.log('Image failed to load');
-  }
+  // if (image && image.complete) {
+  //   console.log('Image loaded:', image.src);
+  // } else {
+  //   console.log('Image failed to load');
+  // }
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
@@ -23,9 +22,9 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidA
 
     if (canvas && ctx && image) {
       image.onload = () => {
-        canvas.width = image.width;
-        canvas.height = image.height;
-        ctx.drawImage(image, 0, 0);
+        canvas.width = 300;
+        canvas.height = 300;
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
       };
     }
   }, [imageUrl]);
@@ -50,17 +49,21 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidA
 
   return (
     <DropperContainer>
+      <CanvasWrapper>
       <canvas
         ref={canvasRef}
         onClick={handleCanvasClick}
         style={{ 
           border: '1px solid black', 
           cursor: isSpoidActive ? 'crosshair' : 'default',
-          display: 'block', 
+          display: 'block',  
+          width: '300px',            
+          height: '300px', 
           pointerEvents: isSpoidActive ? 'auto' : 'none' 
         }}
       />
       <img ref={imageRef} src={imageUrl} alt="Selected" style={{ display: 'none' }} />
+    </CanvasWrapper>
     </DropperContainer>
   );
 };
@@ -69,9 +72,15 @@ export default EyeDropper;
 
 
 const DropperContainer = styled.div`
+  margin-top: 20px;
+`
+const CanvasWrapper = styled.div`
   width: 300px;
   height: 300px;
   border-radius: 10px;
-  object-fit: cover;
-  margin-top: 20px;
-`
+  overflow: hidden; 
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
