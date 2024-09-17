@@ -6,7 +6,6 @@ import ImageUploader from './component/ImageUploader.tsx';
 import EyeDropper from './EyeDropper.tsx';
 import { 
   PlaceholderImage, 
-  StyledImage, 
   ColorDownBtn, 
   ImageGroup, 
   TextSection, 
@@ -27,7 +26,6 @@ function App() {
   const [pickedColor, setPickedColor] = useState<string | null>(null);
   const [isSpoidActive, setIsSpoidActive] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  // console.log(`pickedColor은 ${pickedColor}`)
 
   const handleModalOpen = () => {
     setModalToggle(!modalToggle);
@@ -66,15 +64,14 @@ function App() {
           setIsImageValid={setIsImageValid}
         />
          {imageUrl && isImageValid ?  (
-          // <StyledImage  src={imageUrl} alt="Selected" />
           <EyeDropper imageUrl={imageUrl} onColorPick={handleColorPick} isSpoidActive={isSpoidActive} />
         ) : (
           <PlaceholderImage />
         )}
-        <SpoidButton onClick={toggleSpoid} isSpoidActive={isSpoidActive}>
+        <SpoidButton onClick={toggleSpoid} isSpoidActive={isSpoidActive} disabled={!imageUrl} >
          <i className="fa-solid fa-eye-dropper"></i>
         </SpoidButton>
-        <ShowSpoidColor style={{ backgroundColor: `${pickedColor}` || 'rgb(135,206,235)' }}></ShowSpoidColor>
+        <ShowSpoidColor style={{ backgroundColor: `${pickedColor}` }}></ShowSpoidColor>
       </TextSection>
       
       <ImageGroup>

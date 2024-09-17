@@ -94,8 +94,10 @@ export const getBackgroundGradient = (colorData: string[], fallbackColor: string
 };
 
 export const ShowSpoidColor = styled.div`
-  width: 100%;
+  margin-top: 20px;
+  width: 50%;
   height: 30px;
+  border-radius: 10px;
 `
 
 export const SpoidButton = styled.button<{ isSpoidActive: boolean }>`
@@ -104,9 +106,10 @@ export const SpoidButton = styled.button<{ isSpoidActive: boolean }>`
   border: none;
   padding: 10px;
   font-size: 16px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')}; 
   margin-top: 10px;
   border-radius: 50%;
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)}; 
   &:hover {
     transition: all 0.2s ease;
     background-color: ${({ isSpoidActive }) => (isSpoidActive ? '#A22D66' : '#555')};
