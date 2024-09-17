@@ -10,11 +10,6 @@ interface EyeDropperProps {
 const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidActive }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
-  // if (image && image.complete) {
-  //   console.log('Image loaded:', image.src);
-  // } else {
-  //   console.log('Image failed to load');
-  // }
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
@@ -79,7 +74,6 @@ const CanvasWrapper = styled.div`
   height: 300px;
   border-radius: 10px;
   overflow: hidden; 
-  border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
