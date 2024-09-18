@@ -9,21 +9,21 @@ interface EyeDropperProps {
 
 const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidActive }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const imageRef = useRef<HTMLImageElement | null>(null);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
-    const image = imageRef.current;
+    const image = new Image(); 
 
-    if (canvas && ctx && image) {
-      image.onload = () => {
+    image.src = imageUrl;
+    image.onload = () => {
+      if (canvas && ctx) {
         canvas.width = 300;
         canvas.height = 300;
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-      };
-    }
+      }
+    };
   }, [imageUrl]);
-
 
   const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!isSpoidActive) return;
@@ -45,26 +45,24 @@ const EyeDropper: React.FC<EyeDropperProps> = ({ imageUrl, onColorPick, isSpoidA
   return (
     <DropperContainer>
       <CanvasWrapper>
-      <canvas
-        ref={canvasRef}
-        onClick={handleCanvasClick}
-        style={{ 
-          border: '1px solid black', 
-          cursor: isSpoidActive ? 'crosshair' : 'default',
-          display: 'block',  
-          width: '300px',            
-          height: '300px', 
-          pointerEvents: isSpoidActive ? 'auto' : 'none' 
-        }}
-      />
-      <img ref={imageRef} src={imageUrl} alt="Selected" style={{ display: 'none' }} />
-    </CanvasWrapper>
+        <canvas
+          ref={canvasRef}
+          onClick={handleCanvasClick}
+          style={{ 
+            border: '1px solid black', 
+            cursor: isSpoidActive ? 'crosshair' : 'default',
+            display: 'block',  
+            width: '300px',            
+            height: '300px', 
+            pointerEvents: isSpoidActive ? 'auto' : 'none' 
+          }}
+        />
+      </CanvasWrapper>
     </DropperContainer>
   );
 };
 
 export default EyeDropper;
-
 
 const DropperContainer = styled.div`
   margin-top: 20px;
