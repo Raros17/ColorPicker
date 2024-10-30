@@ -1,5 +1,6 @@
 # color picker
-웹상 이미지의 메인 색상을 추출해봅니다
+웹상 이미지의 메인 색상을 추출해봅니다.
+imgextract.vercel.app
 
 ---
 
